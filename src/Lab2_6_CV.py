@@ -46,20 +46,17 @@ def cross_validation(model, X, y, nFolds):
         nFolds = X.shape[0]
 
     # TODO: Calculate fold_size based on the number of folds
-    fold_size = X.shape[0] // nFolds
+    fold_size = int(X.shape[0] // nFolds)
 
     # TODO: Initialize a list to store the accuracy values of the model for each fold
     accuracy_scores = []
 
     for i in range(nFolds):
         # TODO: Generate indices of samples for the validation set for the fold
-        valid_indices = np.arange(i * fold_size, (i + 1) * fold_size)
+        valid_indices = list(range(i * fold_size, (i + 1) * fold_size))
 
         # TODO: Generate indices of samples for the training set for the fold
-        train_indices = np.concatenate((
-            np.arange(0, i * fold_size),
-            np.arange((i + 1) * fold_size, X.shape[0])
-        ))
+        train_indices = list(range(0, i * fold_size)) + list(range((i + 1) * fold_size, X.shape[0]))
 
         # TODO: Split the dataset into training and validation
         X_train, X_valid = X[train_indices], X[valid_indices]
